@@ -145,6 +145,3 @@ Detailed PDF reports are included with each assignment covering:
 - Performance comparisons
 - Visual documentation
 
-## License
-
-This repository contains educational implementations of computer vision algorithms for learning purposes.
