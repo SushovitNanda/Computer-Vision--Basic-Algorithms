@@ -1,94 +1,150 @@
-# Computer Vision  Basic Algorithms
+# Computer Vision - Basic Algorithms
 
-A comprehensive implementation of fundamental computer vision algorithms from scratch using Python and NumPy. This project demonstrates various image processing techniques including RGB to grayscale conversion, noise analysis, edge detection methods, and a complete Canny edge detector implementation.
+A comprehensive implementation of fundamental computer vision algorithms from scratch using Python and NumPy. This repository contains two assignments covering image processing, edge detection, feature extraction, and texture classification.
 
-## Overview
+## Repository Structure
 
-This repository covers four main computer vision tasks:
+```
+Computer-Vision--Basic-Algorithms-main/
+├── Assignment-1/          # Basic Image Processing and Edge Detection
+│   ├── CV_1.ipynb        # Main implementation notebook
+│   ├── CV_Assignment_1.pdf
+│   └── README.md
+├── Assignment-2/          # Feature Extraction and Texture Classification
+│   ├── cv2.ipynb         # Main implementation notebook
+│   ├── CV_Assignment_2.pdf
+│   └── README.md
+└── README.md             # This file
+```
 
-1. **RGB to Grayscale Conversion & Channel Analysis** - Implement luminance formula and analyze individual color channels
-2. **Gaussian Noise Addition & Analysis** - Add noise to images and study its effects on processing
-3. **Edge Detection Comparison** - Compare Sobel and Laplacian operators with different filter sizes
-4. **Canny Edge Detector** - Complete implementation from scratch with all intermediate steps
+## Assignment 1: Basic Image Processing and Edge Detection
+
+### Topics Covered
+1. **RGB to Grayscale Conversion** - Luminance formula implementation and channel analysis
+2. **Gaussian Noise Analysis** - Noise addition, SNR calculation, and histogram analysis
+3. **Edge Detection Methods** - Sobel and Laplacian operators with multiple filter sizes
+4. **Canny Edge Detector** - Complete from-scratch implementation with all steps
+
+### Key Algorithms
+- Luminance conversion: `Y = 0.299×R + 0.587×G + 0.114×B`
+- Gaussian noise: `f(x) = (1/√(2πσ²)) * e^(-(x-μ)²/(2σ²))`
+- Sobel edge detection: Gradient magnitude computation
+- Laplacian edge detection: Second derivative-based detection
+- Canny algorithm: Gaussian smoothing → Gradient computation → Non-maximum suppression → Hysteresis thresholding
+
+### Results Highlights
+- **Filter Size Impact**: 3×3 filters provide optimal edge detection
+- **Canny Parameters**: σ=1.4, Low threshold=5%, High threshold=15%
+- **Noise Effects**: All methods show varying sensitivity to Gaussian noise
+
+[See Assignment-1 README for details](./Assignment-1/README.md)
+
+## Assignment 2: Feature Extraction and Texture Classification
+
+### Topics Covered
+1. **Integral Image** - Efficient region sum computation
+2. **Haar-like Features** - Four pattern types for feature extraction
+3. **Texture Classification** - Four methods on KTH-TIPS dataset:
+   - Raw pixel intensity
+   - Local Binary Pattern (LBP)
+   - Bag of Words (BoW)
+   - Histogram of Oriented Gradients (HOG)
+
+### Key Algorithms
+- Integral image: O(1) region sum after O(n²) preprocessing
+- LBP: 8-neighbor circular pattern encoding
+- BoW: K-means vocabulary building and histogram representation
+- HOG: Gradient orientation histograms in cells
+
+### Results Highlights
+- **Best Performance**: LBP achieves 93.83% accuracy
+- **Dataset**: KTH-TIPS (10 classes, 810 images)
+- **Feature Dimensions**: Range from 50 (BoW) to 40,000 (Raw Pixels)
+
+[See Assignment-2 README for details](./Assignment-2/README.md)
 
 ## Libraries Used
 
+### Core Libraries
 - **NumPy** - Numerical computations and array operations
 - **Matplotlib** - Visualization and plotting
-- **OpenCV** - Limited to image loading and color space conversion only
-- **Math** - Mathematical functions and kernel generation
+- **OpenCV** - Image loading and preprocessing (limited use)
+- **scikit-learn** - Machine learning tools (SVM, K-means, preprocessing)
+- **PIL (Pillow)** - Image format conversion
+- **Math** - Mathematical functions
 
-## Features Implemented
+## Key Features
 
-### 1. RGB to Grayscale Conversion
-- **Luminance Formula**: `Y = 0.299×R + 0.587×G + 0.114×B`
-- Individual color channel extraction and analysis
-- Statistical analysis of color channels (mean, standard deviation)
-- Histogram computation and visualization
+### From-Scratch Implementation
+- All algorithms implemented from first principles
+- No reliance on high-level computer vision libraries for core algorithms
+- OpenCV used only for basic I/O operations
 
-### 2. Gaussian Noise Analysis
-- Gaussian noise addition with configurable parameters (μ=0, σ²=20)
-- SNR calculation and analysis
-- Clean vs noisy image comparison
-- Histogram analysis of noise effects
+### Comprehensive Analysis
+- Statistical analysis of results
+- Performance comparisons
+- Visualization of intermediate steps
+- Parameter sensitivity analysis
 
-### 3. Edge Detection Methods
-- **Sobel Edge Detector**:
-  - Horizontal and vertical gradient detection
-  - Combined gradient magnitude computation
-  - Support for 3×3, 5×5, and 7×7 kernel sizes
-- **Laplacian Edge Detector**:
-  - Second derivative-based edge detection
-  - Multiple kernel size support
-  - Zero-crossing detection
+### Educational Value
+- Well-documented code with mathematical formulations
+- Step-by-step algorithm explanations
+- Visual demonstrations of each processing stage
 
-### 4. Canny Edge Detector (Complete Implementation)
-- **Step 1**: Gaussian smoothing (σ=1.4)
-- **Step 2**: Gradient magnitude and orientation computation
-- **Step 3**: Non-maximum suppression for edge thinning
-- **Step 4**: Hysteresis thresholding with dual thresholds
-- **Step 5**: Final edge map generation
+## Results Summary
 
-## Key Results
+### Assignment 1: Edge Detection
+- **Best Method**: Canny edge detector
+- **Optimal Filter Size**: 3×3 for Sobel/Laplacian
+- **Noise Impact**: Significant degradation with larger filters
 
-### Image Statistics
-- **Original Image**: 1280×914×3 pixels, 3,509,760 total pixels
-- **Color Channel Analysis**:
-  - Red: Mean=128.55, Std=57.12
-  - Green: Mean=122.03, Std=53.25
-  - Blue: Mean=116.81, Std=50.92
-
-### Edge Detection Performance
-- **3×3 filters**: Optimal edge detection quality with clear, well-defined edges
-- **5×5 filters**: Moderate performance with some edge degradation
-- **7×7 filters**: Poor edge detection with incomplete and disturbed results
-
-### Canny Algorithm Parameters
-- **Gaussian σ**: 1.4 (optimal noise reduction without excessive blurring)
-- **High threshold**: 15% (strong edge detection)
-- **Low threshold**: 5% (weak edge connection)
-
-## Key Findings
-
-1. **Filter Size Impact**: Smaller filters (3×3) provide superior edge detection quality compared to larger filters
-2. **Noise Sensitivity**: The implemented algorithms show varying sensitivity to Gaussian noise
-3. **Canny Superiority**: The Canny edge detector provides the most robust edge detection among all tested methods
-4. **Parameter Optimization**: Careful parameter tuning is crucial for optimal edge detection performance
+### Assignment 2: Texture Classification
+- **Best Method**: Local Binary Pattern (LBP) - 93.83% accuracy
+- **Feature Efficiency**: LBP provides best accuracy-to-dimension ratio
+- **Dataset**: Successfully classified 10 texture classes from KTH-TIPS
 
 ## Visualizations
 
-The project includes comprehensive visualizations for:
-- Original image and color channel histograms
-- Grayscale conversion results
-- Noise addition effects and comparisons
-- Edge detection results across different methods and filter sizes
-- Complete Canny algorithm step-by-step visualization
+Both assignments include extensive visualizations:
+- Original and processed images
+- Histograms and statistical plots
+- Step-by-step algorithm visualization
+- Performance comparison charts
+- Feature visualization
+
+## Getting Started
+
+### Prerequisites
+```bash
+pip install numpy matplotlib opencv-python scikit-learn pillow
+```
+
+### Running the Code
+1. Open the Jupyter notebooks in each assignment directory
+2. Ensure required images/datasets are in the correct paths
+3. Run cells sequentially to reproduce results
+
+### Dataset Requirements
+- **Assignment 1**: Requires an RGB image file (`Image.jpg`)
+- **Assignment 2**: Requires KTH-TIPS dataset in specified directory
+
+## Key Findings
+
+1. **Filter Size Matters**: Smaller filters (3×3) provide better edge detection quality
+2. **Feature Engineering Critical**: LBP outperforms raw pixels by 51% in texture classification
+3. **Noise Sensitivity**: All algorithms show varying sensitivity to Gaussian noise
+4. **Canny Superiority**: Canny edge detector provides most robust edge detection
+5. **LBP Excellence**: Local Binary Pattern is highly effective for texture classification
 
 ## Report
 
-A detailed PDF report is included with:
+Detailed PDF reports are included with each assignment covering:
 - Mathematical formulations
 - Algorithm explanations
 - Results analysis
 - Performance comparisons
 - Visual documentation
+
+## License
+
+This repository contains educational implementations of computer vision algorithms for learning purposes.
